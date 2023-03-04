@@ -4,7 +4,6 @@ import styles from '../styles/Home.module.css';
 import Layout from '../components/layout';
 import { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import Alert from './Alert';
 import { getSortedPostsData } from '../lib/posts';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
