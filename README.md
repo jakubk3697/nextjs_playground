@@ -1,1 +1,1 @@
-# NextJS repo with all NextJS training projects
+## This is NextJS repository with all NextJS training projects
