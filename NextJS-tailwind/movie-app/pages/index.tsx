@@ -1,18 +1,22 @@
 import { Hero } from "@/components/Hero";
+import { PopularMovies } from "@/components/PopularMovies";
 import { server } from "@/config";
 import axios from "axios";
 
-type moviesProps = {
+export type HomeProps = {
   movies: {
-    name: string;
+    page: number;
+    results: object[];
+    total_pages: number;
+    total_results: number;
   }
 }
 
-export default function Home({ movies }: moviesProps) {
-  console.log(movies);
+export default function Home({ movies }: HomeProps) {
   return (
     <>
       <Hero />
+      <PopularMovies movies={movies.results} />
     </>
   )
 }
