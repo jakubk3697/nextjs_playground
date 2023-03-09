@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import axios from "axios";
 
 type moviesProps = {
   movies: {
@@ -16,10 +17,12 @@ export default function Home({movies}: moviesProps) {
 }
 
 export async function getStaticProps() {
-  const movies = [{name: 'hello'}];
+  const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`);
 
   return {
-    props: {movies},
+    props: {
+      movies: res.data
+    }
   }
 }
 
