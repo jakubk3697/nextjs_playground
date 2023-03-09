@@ -8,7 +8,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'neue': ['Bebas Neue', 'cursive'],
+      }
+    },
   },
   plugins: [],
 }
