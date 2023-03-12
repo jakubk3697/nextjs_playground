@@ -3,8 +3,7 @@ import TodosList from "./TodosList";
 const Todos = () => {
     return (
         <>
-            {/* @ts-ignore */}
-            < TodosList />
+            <h1>List of todos:</h1>
         </>
     );
 }
