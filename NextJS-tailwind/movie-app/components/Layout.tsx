@@ -9,7 +9,7 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
     return (
-        <>
+        <div>
             <Meta />
             <div>
                 <Navbar />
@@ -18,6 +18,6 @@ export default function Layout({ children }: LayoutProps) {
                 </main>
                 <Footer />
             </div>
-        </>
+        </div>
     )
 }

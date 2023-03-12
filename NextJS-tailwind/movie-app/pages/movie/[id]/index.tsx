@@ -10,7 +10,6 @@ type Genre = {
 }
 
 export default function Movie({ movie }: any) {
-    console.log(movie);
     return (
         <div className="container max-w-4xl mx-auto pt-6">
             <Meta title={movie.title} />
