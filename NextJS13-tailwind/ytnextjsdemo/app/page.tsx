@@ -1,6 +1,22 @@
+import { Suspense } from "react";
+import TodosList from "./todos/TodosList";
+
 const Home = () => {
     return (
-        <h1>Home page</h1>
+        <>
+            <Suspense fallback={<p>Loading the Todos...</p>}>
+                <div className="flex space-x-2">
+                    {/* @ts-igone */}
+                    <TodosList />
+                </div>
+            </Suspense>
+            <Suspense fallback={<p>Loading something else...</p>}>
+                <div className="flex space-x-2">
+                    {/* @ts-igone */}
+                    <TodosList />
+                </div>
+            </Suspense>
+        </>
     );
 }
 
