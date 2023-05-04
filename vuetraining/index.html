@@ -14,38 +14,98 @@
 </head>
 
 <body>
-    <nav id="nav" class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">My vue</a>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li v-for="link in links" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">{{ link }}</a>
-                </li>
-            </ul>
+    <div id="app">
+        <div>
+            <navbar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></navbar>
+            <page-viewer :page="pages[activePage]"></page-viewer>
         </div>
-    </nav>
-    <div id="content" class="container">
-        <h1>{{title}}</h1>
-        <p>{{content}}</p>
     </div>
 
     <script>
-        Vue.createApp({
+        let app = Vue.createApp({
             data() {
                 return {
-                    links: ['Home', 'About', 'Contact'],
+                    activePage: 0,
+                    pages: [
+                        {
+                            link: { text: 'Home', url: 'index.html' },
+                            pageTitle: 'Home Page',
+                            content: 'This is the home content'
+                        },
+                        {
+                            link: { text: 'About', url: 'about.html' },
+                            pageTitle: 'About Page',
+                            content: 'This is the about content'
+                        },
+                        {
+                            link: { text: 'Contact', url: 'contact.html' },
+                            pageTitle: 'Contact Page',
+                            content: 'This is the contact content'
+                        }
+                    ]
                 }
-            }
-        }).mount('#nav')
+            },
+        })
 
-        Vue.createApp({
+        app.component('page-viewer', {
+            props: ['page'],
+            template: `
+                <div class="container">
+                    <h1>{{ page.pageTitle }}</h1>
+                    <p>{{ page.content }}</p>
+                </div>
+            `,
+        })
+
+
+        app.component('navbar', {
+            props: ['pages', 'activePage', 'navLinkClick'],
+            template: `
+            <nav id="nav" :class="[\`navbar-\${ theme }\`, \`bg-\${theme}\`, 'navbar', 'navbar-expand-lg']">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="#">My vue</a>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li v-for="(page, index) in pages" :key="index" class="nav-item">
+                    <a 
+                        class="nav-link" 
+                        :class="{ 'active': activePage === index }" 
+                        aria-current="page"
+                        :href="page.link.url" 
+                        @click.prevent="navLinkClick(index)">
+                        {{ page.link.text }}
+                    </a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <button 
+                    class="btn btn-primary" 
+                    @click.prevent="changeTheme"
+                >
+                    Change theme
+                </button>
+            </form>
+             </div>
+          </nav>
+            `,
             data() {
                 return {
-                    title: 'Hello world',
-                    content: 'Lorem ipsum',
+                    theme: 'light',
+                }
+            },
+            methods: {
+                changeTheme() {
+                    let theme = 'light';
+
+                    if (this.theme === 'light') {
+                        theme = 'dark';
+                    }
+
+                    this.theme = theme;
                 }
             }
-        }).mount('#content')
+        })
+
+        app.mount('#app')
     </script>
 </body>
 
