@@ -16,8 +16,11 @@
 <body>
     <div id="app">
         <div>
-            <navbar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></navbar>
-            <page-viewer :page="pages[activePage]"></page-viewer>
+            <div>
+                <navbar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index">
+                </navbar>
+                <page-viewer :page="pages[activePage]"></page-viewer>
+            </div>
         </div>
     </div>
 
