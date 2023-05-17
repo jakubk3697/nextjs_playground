@@ -3,15 +3,14 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">My vue</a>
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <li v-for="(page, index) in pages" :key="index" class="nav-item">
+                <li v-for="(page, index) in publishedPages" :key="index" class="nav-item">
                     <navbar-link :page="page" :isAtive="activePage === page" @click.prevent="navLinkClick(index)">
-
                     </navbar-link>
                 </li>
             </ul>
             <form class="d-flex">
                 <button class="btn btn-primary" @click.prevent="changeTheme">
-                    Change theme
+                    Change the me
                 </button>
             </form>
         </div>
@@ -31,6 +30,14 @@ export default {
             theme: 'light',
         }
     },
+    created() {
+        this.getThemeSetting();
+    },
+    computed: {
+        publishedPages() {
+            return this.pages.filter(page => page.published);
+        }
+    },
     methods: {
         changeTheme() {
             let theme = 'light';
@@ -40,7 +47,18 @@ export default {
             }
 
             this.theme = theme;
+            this.storeThemeSetting();
+        },
+        storeThemeSetting() {
+            localStorage.setItem('theme', this.theme);
+        },
+        getThemeSetting() {
+            let theme = localStorage.getItem('theme');
+
+            if (theme) {
+                this.theme = theme;
+            }
         }
-    }
+    },
 }
 </script>
