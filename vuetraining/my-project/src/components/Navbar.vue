@@ -4,8 +4,13 @@
             <a class="navbar-brand" href="#">My vue</a>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li v-for="(page, index) in publishedPages" :key="index" class="nav-item">
-                    <navbar-link :page="page" :isAtive="activePage === page" @click.prevent="navLinkClick(index)">
+                    <navbar-link :page="page" :index="index" active-class="active">
                     </navbar-link>
+                </li>
+                <li>
+                    <router-link :to="`/pages`" class="nav-link" aria-current="page">
+                        Pages
+                    </router-link>
                 </li>
             </ul>
             <form class="d-flex">
@@ -20,11 +25,11 @@
 <script>
 import NavbarLink from './NavbarLink.vue';
 export default {
+    name: "AppNavbar",
     components: {
         NavbarLink,
     },
-    name: "AppNavbar",
-    props: ['pages', 'activePage', 'navLinkClick'],
+    inject: ['$pages'],
     data() {
         return {
             theme: 'light',
@@ -32,6 +37,7 @@ export default {
     },
     created() {
         this.getThemeSetting();
+        this.pages = this.$pages.getAllPages();
     },
     computed: {
         publishedPages() {

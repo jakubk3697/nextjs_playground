@@ -1,12 +1,11 @@
 <template>
     <div class="container">
-        <h1>{{ page.pageTitle }}</h1>
-        <p>{{ page.content }}</p>
+        <h2>Page Management</h2>
+        <router-view></router-view>
     </div>
 </template>
-
 <script>
 export default {
-    props: ['page'],
+    name: "PagesBox",
 }
 </script>
