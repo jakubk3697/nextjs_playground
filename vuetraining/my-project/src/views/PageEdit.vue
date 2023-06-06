@@ -1,8 +1,5 @@
 <template>
     <div>
-        <h1 class="mb-3">
-            Edit Page {{ page.pageTitle }}
-        </h1>
         <form action="" class="container mb-3">
             <div class="row">
                 <div class="col-md-8">
@@ -52,16 +49,19 @@
 
 
 <script setup>
-import { defineProps } from 'vue';
-import { inject } from 'vue';
+    import { useRouter } from 'vue-router';
+    import { defineProps } from 'vue';
+    import { inject } from 'vue';
 
-const pages = inject('$pages');
+    const router = useRouter();
+    const pages = inject('$pages');
 
-const props = defineProps(['index']);
+    const props = defineProps(['index']);
 
-let page = pages.getSinglePage(props.index);
+    let page = pages.getSinglePage(props.index);
 
-function submit() {
-    pages.editPage(props.index, page);
-}
+    function submit() {
+        pages.editPage(props.index, page);
+        router.push('/');
+    }
 </script>
