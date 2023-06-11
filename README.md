@@ -1,1 +1,1 @@
-### This is the repository containing working drafts and exercises for future projects.
+### This is a repository containing working projects and other programming exercises
